@@ -1,41 +1,36 @@
+// app/layout.tsx
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
-import Head from "next/head";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+// تعريف الخطوط المحلية
+const geistSans = localFont({
+  src: "../fonts/GeistVF.woff",
+  variable: "--font-geist-sans",
+  weight: "100 900",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+const geistMono = localFont({
+  src: "../fonts/GeistMonoVF.woff",
+  variable: "--font-geist-mono",
+  weight: "100 900",
 });
 
+// تعريف بيانات الميتاداتا للموقع
 export const metadata: Metadata = {
-  title: "AutoSubs" as string,
-  description: "AI-Powered subtitle generation" as string,
+  title: "مشروعي",
+  description: "هذا هو وصف مشروعي",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className="overflow-x-hidden">
-      <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased overflow-x-hidden`}
-      >
-        <Head>
-          <link rel="icon" href="/favicon.ico" />
-          <title>AutoSubs</title>
-          <meta name="description" content={metadata.description ?? "Default Description"} />
-        </Head>
+    <html lang="ar" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <body>
         <ThemeProvider>
           {children}
         </ThemeProvider>
